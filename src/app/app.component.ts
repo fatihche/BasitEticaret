@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  public option={
+    position:["bottom","right"],
+    timeOut:3000,
+    lastOnBottom:true
+  }
 }

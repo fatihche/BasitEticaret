@@ -1,0 +1,43 @@
+<h4 class="page-header">Shippig Details</h4>
+<!---->
+<form #shippingForm="ngForm" (ngSubmit)="checkout(shippingForm)">
+  <!--burası formun  başarılı şekilde post olduğunda controllerda gideceği metot. -->
+  <div class="form-group" [class.has-error]="fullName.invalid&&fullName.dirty">
+    <!--dirty vermemizin sebebi form açılır aılmaz name alanı bol olacağından hata  verecek.-->
+    <label class="control-label" for="fullName">Full Name</label>
+    <input (change)="isDirty=true" #fullName="ngModel" type="text" class="form-control" id="fullName" name="fullName" [(ngModel)]="model.fullName" required>
+    <!--inputun ismi fullname ama bunun bir input ismi olduğunu anlatmak için ngModel yapıyoruz. benim bunu modeldeki yani shippingDetaildeki(.ts'de bu nesneden yarattık onun propert'si) fullName ile bağlamam gerekiyor-->
+    <span *ngIf="fullName.invalid&&fullName.dirty" class="help-block">Full Name is required</span>
+    <!--kullanıcı hata yaparsa bu spani göstericez.-->
+  </div>
+
+  <!--angularda form olduğunu anlatmak bunu yönetmek için bu forma bir isim vermemiz gerekiyor.-->
+
+
+  <!--Adres için-->
+
+  <div class="form-group" [class.has-error]="addres.invalid&&addres.dirty">
+
+    <label class="control-label" for="fullName">Addres</label>
+    <textarea (change)="isDirty=true" #addres="ngModel" type="text" class="form-control" id="addres" name="addres" [(ngModel)]="model.addres" required
+      rows="3" minlength="10"></textarea>
+    <span *ngIf="addres.invalid&&addres.dirty" class="help-block">Addres is required and min 10 characters</span>
+  </div>
+
+  <div class="form-group" [ngClass]="{'has-error':city.value==-1&&city.dirty}">
+    <label class="control-label" for="cityId">City</label>
+    <select #city="ngModel" id="cityId" name="cityId" required class="form-control" [(ngModel)]="model.cityId">
+    <option value="-1" selected>--Select--</option>
+    <option *ngFor="let item of cities" [value]="item.id">{{item.name}}</option>
+    </select>
+    <span *ngIf="city.value==-1&&city.dirty" class="help-block">city is required</span>
+
+  </div>
+  <div class="checkbox">
+   <label for=""> </label>
+     <input type="checkbox"name="isGift"[(ngModel)]="model.isGift">Is Gift
+  
+  </div>
+  <button type="submit" class="btn btn-primary"[disabled]="shippingForm.invalid">Complate</button>
+  <!-- disabled özelliği eğer değerler doğru değilse geçerli değilse onu disable ediyor iptal ediyor.eğer doğru girilmişsse forma submit oluyor-->
+</form>

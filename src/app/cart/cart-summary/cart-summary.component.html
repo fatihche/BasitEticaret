@@ -1,0 +1,18 @@
+<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Sepetin:{{totalCartItemPrice}}({{totalCartItem}})
+        </a>
+        
+          <ul class="dropdown-menu">
+            <li>
+              
+           <a  *ngFor="let item of cartItems"><button>x</button>{{item.product.productName}}({{item.quantity}})
+             
+           </a>
+          </li>
+          <hr />
+          <a class="dropdown-item" routerLink="my-cart" >Sepete Git</a>
+          </ul>
+         
+        
+      </li>
